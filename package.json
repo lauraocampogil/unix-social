@@ -1,0 +1,18 @@
+{
+  "name": "unix-social",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Unix Studio — automatic social content: Notion → rendered visuals (PNG/MP4) → Postiz scheduling",
+  "type": "module",
+  "scripts": {
+    "preview": "node src/preview.js",
+    "run-once": "node src/run.js",
+    "start": "node src/cron.js"
+  },
+  "dependencies": {
+    "playwright": "1.49.1"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
