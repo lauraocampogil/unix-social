@@ -27,7 +27,8 @@ function toPost(page) {
     publishAt: p['Publish at']?.date?.start || null,
     language: p['Language']?.select?.name || 'EN',
     fieldsRaw: text(p['Fields (JSON)']),
-    caption: text(p['Caption'])
+    caption: text(p['Caption']),
+    hashtags: text(p['Hashtags'])
   };
 }
 

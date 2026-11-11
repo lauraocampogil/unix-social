@@ -37,6 +37,7 @@ export async function runOnce() {
       const res = await schedule({
         date: publishDate(post.publishAt),
         caption: post.caption || post.title,
+        hashtags: post.hashtags,
         media,
         platforms: post.platforms,
         kind,

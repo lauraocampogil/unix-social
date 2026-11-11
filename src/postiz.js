@@ -42,7 +42,7 @@ export async function findIntegration(platform) {
   const found = forced
     ? list.find((i) => i.id === forced)
     : PREFERRED[platform].map((id) => list.find((i) => (i.identifier || i.providerIdentifier) === id && !i.disabled)).find(Boolean);
-  if (!found) throw new Error(`No Postiz channel connected for ${platform}. Connect it in Postiz first.`);
+  if (!found) return null;
   return { id: found.id, type: found.identifier || found.providerIdentifier };
 }
 
@@ -75,16 +75,36 @@ function settingsFor(type, { kind, igPostType, caption }) {
   return { __type: type };
 }
 
+// Hashtags: from the Notion "Hashtags" field, or a default set. TikTok always gets them.
+const DEFAULT_TAGS = '#unixstudio #smallbusiness #webdesign #brussels #bruxelles #entrepreneur';
+export function normalizeTags(raw) {
+  const tags = (raw || '').split(/[\s,]+/).filter(Boolean).map((t) => '#' + t.replace(/^#+/, ''));
+  return [...new Set(tags)];
+}
+function contentFor(type, caption, hashtags) {
+  let tags = normalizeTags(hashtags);
+  if (!tags.length) tags = normalizeTags(DEFAULT_TAGS);
+  if (type.startsWith('linkedin')) tags = tags.slice(0, 3);
+  else if (type.startsWith('instagram')) tags = tags.slice(0, 8);
+  else tags = tags.slice(0, 10);
+  const body = caption.replace(/(\s#[\p{L}\p{N}_]+)+\s*$/u, '').trim(); // avoid doubling tags already in the caption
+  return `${body}\n\n${tags.join(' ')}`;
+}
+
 /** Schedules one post on several platforms in a single API call (the create endpoint is rate-limited). */
-export async function schedule({ date, caption, media, platforms, kind, igPostType }) {
+export async function schedule({ date, caption, hashtags, media, platforms, kind, igPostType }) {
   const posts = [];
+  const skipped = [];
   for (const platform of platforms) {
     const integ = await findIntegration(platform);
+    if (!integ) { skipped.push(platform); continue; } // e.g. LinkedIn not connected yet → skip, don't fail
     posts.push({
       integration: { id: integ.id },
-      value: [{ content: caption, image: media }],
+      value: [{ content: contentFor(integ.type, caption, hashtags), image: media }],
       settings: settingsFor(integ.type, { kind, igPostType, caption })
     });
   }
+  if (skipped.length) console.warn(`[postiz] skipped (not connected): ${skipped.join(', ')}`);
+  if (!posts.length) throw new Error(`No Postiz channel connected for ${platforms.join(', ')}. Connect it in Postiz first.`);
   return call('POST', '/posts', { type: 'schedule', date, shortLink: false, tags: [], posts });
 }

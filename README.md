@@ -52,7 +52,7 @@ Après chaque connexion, le réseau apparaît comme « channel » dans Postiz. L
 
 ## Au quotidien
 1. Le lundi, l'agent remplit **Tendances** et crée 3 à 5 posts en **To review**.
-2. Tu relis : textes du visuel dans **Fields (JSON)**, légende dans **Caption**, date dans **Publish at**, réseaux dans **Platforms**.
+2. Tu relis : textes du visuel dans **Fields (JSON)**, légende dans **Caption**, date dans **Publish at**, réseaux dans **Platforms**, hashtags dans **Hashtags** (séparés par des espaces ; vide = jeu par défaut). TikTok reçoit toujours des hashtags, Instagram jusqu'à 8, LinkedIn 3. Un réseau pas encore connecté dans Postiz (ex. LinkedIn) est simplement ignoré.
 3. Tu passes en **Approved** → dans les 10 minutes, le post est généré et programmé → **Scheduled** (avec un lien **Preview**).
 4. Si quelque chose ne va pas → statut **Error** et le message dans **Error**. Corrige, puis remets en **Approved**.
 
