@@ -228,6 +228,197 @@ Type : image · format 1080×1080
 }
 ```
 
+# Vidéos sans visage (nouvelles)
+
+Les templates avec `url` filment le vrai site tout seul (scroll sur téléphone). `broll-text` utilise tes clips de `assets/broll`.
+Champs « style » : `box` (texte dans des cases blanches, comme l'outil texte de TikTok) ou `plain` (texte blanc avec contour).
+Champs « position » : `top`, `center`, `bottom`.
+
+## client-showcase
+Type : video (15s) · format 1080×1920
+```json
+{
+  "url": "https://yaniswash.be",
+  "business": "Yaniswash",
+  "sector": "Carwash · Brussels",
+  "hook": "This carwash had no website.",
+  "before": "People called all day just to ask the price.",
+  "after": "Now the prices are online. One button to book.",
+  "closing": "Small business, big bloom."
+}
+```
+
+## site-review
+Type : video (15s) · format 1080×1920
+```json
+{
+  "url": "https://unixcreativestudio.com/en",
+  "hook": "This website says it all in 4 seconds.",
+  "points": [
+    "One clear sentence on top",
+    "Soft colours, one style",
+    "Prices and next step, no hunting"
+  ],
+  "credit": "Example site · credit the studio that made it",
+  "closing": "Good ideas work for small businesses too."
+}
+```
+
+## site-fix
+Type : video (16s) · format 1080×1920
+```json
+{
+  "url": "https://yaniswash.be",
+  "hook": "You sent us your website. 3 small fixes.",
+  "site": "yaniswash.be",
+  "fixes": [
+    {
+      "title": "Prices higher up",
+      "body": "Most people scroll for the price. Show it in the first screen."
+    },
+    {
+      "title": "One button, always visible",
+      "body": "“Book a wash” should follow you down the page."
+    },
+    {
+      "title": "Say where you work",
+      "body": "Add “Brussels and around” so Google and ChatGPT know."
+    }
+  ],
+  "closing": "Want yours checked? Send it on our website."
+}
+```
+
+## explainer-reel
+Type : video (13s) · format 1080×1920
+```json
+{
+  "term": "SEO",
+  "object": "🥐",
+  "hook": "SEO explained with a croissant.",
+  "lines": [
+    "You’re the best bakery in town… in a back street.",
+    "SEO is the sign on the main street: croissants this way.",
+    "Say what you do, where you are, and load fast on a phone."
+  ],
+  "closing": "No tech talk. That’s the whole thing."
+}
+```
+
+## ai-demo
+Type : video (14s) · format 1080×1920
+```json
+{
+  "hook": "Hairdressers: stop answering “open on Sunday?”",
+  "business": "Your salon",
+  "messages": [
+    {
+      "from": "client",
+      "text": "Hi! Are you open on Sunday?"
+    },
+    {
+      "from": "ai",
+      "text": "Hi! We’re closed on Sundays, but Saturday at 10:00 is free. Shall I book it?"
+    },
+    {
+      "from": "client",
+      "text": "Yes please!"
+    },
+    {
+      "from": "ai",
+      "text": "Done ✓ See you Saturday at 10:00."
+    }
+  ],
+  "label": "Demo · an AI assistant on your website",
+  "closing": "You get your Sundays back."
+}
+```
+
+## price-breakdown
+Type : video (13s) · format 1080×1920
+```json
+{
+  "hook": "What’s really inside a website price?",
+  "title": "A website for a small business",
+  "items": [
+    {
+      "label": "A plan for what your clients need",
+      "price": ""
+    },
+    {
+      "label": "Design that looks like you",
+      "price": ""
+    },
+    {
+      "label": "Words that say what you do",
+      "price": ""
+    },
+    {
+      "label": "Built to load fast on a phone",
+      "price": ""
+    },
+    {
+      "label": "Found on Google and ChatGPT",
+      "price": ""
+    }
+  ],
+  "total": "Fixed price, in writing, within 48 hours",
+  "closing": "Clear prices. No surprises."
+}
+```
+
+## founder-diary
+Type : video (15s) · format 1080×1920
+```json
+{
+  "day": "Day 1",
+  "url": "https://unixcreativestudio.com/en",
+  "lines": [
+    "I just graduated. Today I’m starting a design studio in Brussels.",
+    "No investors. One laptop. One idea:",
+    "help small businesses get found, without the tech talk.",
+    "I’ll share everything here: the wins, the mistakes, the numbers."
+  ],
+  "sign": "Building Unix",
+  "closing": "Follow along. Day by day."
+}
+```
+
+## broll-text
+Type : video (9s) · format 1080×1920
+```json
+{
+  "clips": [
+    "sample-desk.mp4",
+    "sample-scroll.mp4"
+  ],
+  "lines": [
+    "pov: you finally have a website that brings clients",
+    "not a fancy one.",
+    "just clear prices, one button and your name on google",
+    "that’s literally it 🌸"
+  ],
+  "style": "box",
+  "position": "center"
+}
+```
+
+## screen-native
+Type : video (10s) · format 1080×1920
+```json
+{
+  "url": "https://yaniswash.be",
+  "lines": [
+    "we made a website for a carwash in brussels",
+    "prices right there. no calling to ask.",
+    "one button to book",
+    "small business, big bloom 🌸"
+  ],
+  "style": "box",
+  "position": "top"
+}
+```
+
 ## Règles d'écriture (pour toi et pour l'agent)
 - Anglais par défaut, phrases courtes, zéro jargon tech, ton calme avec une pointe d'humour.
 - Stories : titre ≤ 7 mots ; tâches (tasks-story) ≤ 30 caractères chacune, 3 à 5 tâches ; requête (search-story) ≤ 22 caractères.
@@ -235,3 +426,10 @@ Type : image · format 1080×1080
 - review-post : uniquement de vrais avis clients, jamais inventés.
 - list-linkedin : 3 à 6 lignes ; cards-linkedin : exactement 3 cartes.
 - Pas de chiffres ou statistiques inventés.
+- Vidéos organiques (`broll-text`, `screen-native`) : texte style TikTok du moment, en minuscules, phrases très courtes (≤ 60 caractères par ligne), 3 à 5 lignes, 1 emoji maximum (🌸 de préférence). Formats qui marchent : « pov: … », « things nobody tells you about … », « small business owners when … », « day 12 of building a studio ». Toujours le ton Unix : calme, gentil, zéro jargon, zéro hype, pas de « link in bio NOW ».
+- `client-showcase` : uniquement des clients de la base Clientes avec « Permiso para mostrar » coché. Rien d'inventé.
+- `site-fix` : uniquement des sites envoyés par leur propriétaire.
+- `site-review` : toujours créditer le studio qui a fait le site.
+- `price-breakdown` : pas de prix sauf les vrais prix Unix donnés par Laura.
+- `founder-diary` : uniquement des notes de la base Diario.
+- `ai-demo` : toujours marqué « Demo ».

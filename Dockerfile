@@ -1,6 +1,6 @@
 FROM mcr.microsoft.com/playwright:v1.49.1-jammy
 
-RUN apt-get update && apt-get install -y --no-install-recommends ffmpeg && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends ffmpeg fonts-noto-color-emoji && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 COPY package.json ./
