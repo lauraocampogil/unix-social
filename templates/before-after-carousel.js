@@ -12,7 +12,7 @@ export default {
   igPostType: 'post',
   example: {
     cover: { tag: 'AI consulting', title: 'What can AI do for a small business?', sub: 'Three real examples. No robots, no tech talk.', swipe: 'Swipe' },
-    labels: { item: 'Example', before: 'Before', after: 'After' },
+    labels: { item: 'Exemple', before: 'Avant', after: 'Après' },
     items: [
       { before: 'Answering the same questions all day.', after: 'An assistant on your website answers them, day and night, in your words.' },
       { before: 'Writing every quote by hand.', after: 'Your client fills in a short form. The quote is ready for you to check and send.' },
@@ -22,7 +22,7 @@ export default {
   },
   build(f) {
     const total = f.items.length + 2;
-    const L = f.labels || { item: 'Example', before: 'Before', after: 'After' };
+    const L = f.labels || { item: 'Exemple', before: 'Avant', after: 'Après' };
     const slides = [];
     slides.push(page({ w: W, h: H, bg: C.violet, body: `
 <img src="${A.ghost}" class="abs" style="left:-220px;top:760px;width:700px;transform:rotate(18deg)">

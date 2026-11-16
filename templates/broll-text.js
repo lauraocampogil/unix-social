@@ -22,7 +22,8 @@ export default {
   },
   async prepare(f, cap) {
     const D = Number(f.duration || this.duration);
-    const clips = (f.clips || []).slice(0, 4);
+    // Clips: explicit file names, or picked automatically from the Notion "B-roll" tags of the post.
+    const clips = (f.brollTags?.length && (!f.clips || f.clips === this.example.clips) ? await cap.brollFor(f.brollTags, f._seed) : f.clips || []).slice(0, 4);
     const seg = D / Math.max(1, clips.length);
     f._clips = [];
     for (let i = 0; i < clips.length; i++) f._clips.push({ cap: await cap.clip(clips[i], { seconds: seg + 0.2 }), start: i * seg, end: (i + 1) * seg });

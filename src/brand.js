@@ -31,7 +31,7 @@ export const esc = (s = '') =>
   String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
 export function page({ w, h, bg, body, css = '' }) {
-  return `<!doctype html><html lang="en"><head><meta charset="utf-8">
+  return `<!doctype html><html lang="fr"><head><meta charset="utf-8">
 <style>
 @font-face{font-family:"Apfel Grotezk";src:url(ApfelGrotezk-Satt.woff2) format("woff2");font-weight:900}
 @font-face{font-family:"Haskoy";src:url(Haskoy-Medium.woff2) format("woff2");font-weight:500}

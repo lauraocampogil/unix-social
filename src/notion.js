@@ -28,7 +28,8 @@ function toPost(page) {
     language: p['Language']?.select?.name || 'EN',
     fieldsRaw: text(p['Fields (JSON)']),
     caption: text(p['Caption']),
-    hashtags: text(p['Hashtags'])
+    hashtags: text(p['Hashtags']),
+    broll: (p['B-roll']?.multi_select || []).map((o) => o.name)
   };
 }
 

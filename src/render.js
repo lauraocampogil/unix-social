@@ -13,6 +13,10 @@ import { templates } from '../templates/index.js';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const ASSETS = path.join(ROOT, 'assets');
 const FPS = Number(process.env.VIDEO_FPS || 30);
+export const BROLL_PREFIX = {
+  '🎥 Moi au clavier': 'clavier', '☕ Café': 'cafe', '✏️ Croquis papier': 'croquis', '📱 Téléphone + site': 'telephone',
+  '💻 Écran / scroll': 'ecran', '🚋 Bruxelles': 'bruxelles', '🏪 Chez le client': 'client', '🌇 Fin de journée': 'soir'
+};
 
 let browserPromise;
 const browser = () => (browserPromise ??= chromium.launch({ args: ['--font-render-hinting=none'] }));
@@ -31,6 +35,15 @@ async function openPage(html, size) {
   await page.evaluate(async () => {
     await document.fonts.ready;
     await Promise.all([...document.images].map((i) => (i.complete ? 0 : new Promise((r) => (i.onload = i.onerror = r)))));
+    // Auto-fit: big titles shrink until no word overflows (French words are long), and blocks with
+    // data-maxh shrink until they fit that height.
+    for (const el of document.querySelectorAll('.display, [data-maxh]')) {
+      let size = parseFloat(getComputedStyle(el).fontSize);
+      const maxh = Number(el.dataset.maxh || 0);
+      const over = () => el.scrollWidth > el.clientWidth + 2 || (maxh && el.scrollHeight > maxh);
+      let guard = 40;
+      while (over() && size > 24 && guard--) { size *= 0.94; el.style.fontSize = size + 'px'; }
+    }
   });
   return { page, ctx, cleanup: async () => { await ctx.close(); await rm(file, { force: true }); } };
 }
@@ -124,6 +137,22 @@ export async function render(templateName, fields, outDir, slug = 'post') {
         });
         const count = (await readdir(dir)).length;
         return { frames: `${path.basename(capDir)}/${name}`, count, fps: FPS };
+      },
+      // Notion "B-roll" tag → files named <prefix>-*.mp4 in assets/broll (e.g. ☕ Café → cafe-1.mp4).
+      brollFor: async (tags, seed = '') => {
+        const dir = path.join(ASSETS, 'broll');
+        const all = existsSync(dir) ? (await readdir(dir)).filter((x) => /\.(mp4|mov|m4v)$/i.test(x)) : [];
+        const picked = [], missing = [];
+        let h = 0;
+        for (const c of String(seed)) h = (h * 31 + c.charCodeAt(0)) >>> 0;
+        for (const tag of tags) {
+          const prefix = BROLL_PREFIX[tag] || tag.toLowerCase().normalize('NFD').replace(/[^a-z]/g, '');
+          const files = all.filter((x) => x.toLowerCase().startsWith(prefix)).sort();
+          if (files.length) picked.push(files[h % files.length]);
+          else missing.push(`${tag} (fichier ${prefix}-1.mp4)`);
+        }
+        if (missing.length) throw new Error('Il manque le B-roll : ' + missing.join(', ') + ' dans assets/broll');
+        return picked;
       },
       still: async (url, opts) => {
         await mkdir(capDir, { recursive: true });

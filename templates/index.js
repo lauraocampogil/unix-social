@@ -17,6 +17,8 @@ import founderDiary from './founder-diary.js';
 import brollText from './broll-text.js';
 import screenNative from './screen-native.js';
 
+import { EXAMPLES_FR } from './examples-fr.js';
+
 export const templates = Object.fromEntries(
-  [searchStory, tasksStory, quizStory, marqueeReel, signsCarousel, beforeAfterCarousel, reviewPost, listLinkedin, cardsLinkedin, clientShowcase, siteReview, siteFix, explainerReel, aiDemo, priceBreakdown, founderDiary, brollText, screenNative].map((t) => [t.name, t])
+  [searchStory, tasksStory, quizStory, marqueeReel, signsCarousel, beforeAfterCarousel, reviewPost, listLinkedin, cardsLinkedin, clientShowcase, siteReview, siteFix, explainerReel, aiDemo, priceBreakdown, founderDiary, brollText, screenNative].map((t) => [t.name, EXAMPLES_FR[t.name] ? Object.assign(t, { example: EXAMPLES_FR[t.name] }) : t])
 );

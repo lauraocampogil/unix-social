@@ -34,7 +34,7 @@ export default {
 <img src="${A.blobBottom}" class="abs" style="left:0;bottom:0;width:1080px">
 ${reelBackdrop(70)}
 <div class="abs" style="left:0;right:0;top:300px;display:flex;justify-content:center;${tl.show(0.1, 10.9, { dy: 0 })}">
-  <div style="background:${C.cream};color:${C.dark};border-radius:999px;padding:14px 34px;font-weight:700;font-size:36px">No tech talk · ${esc(f.term)}</div>
+  <div style="background:${C.cream};color:${C.dark};border-radius:999px;padding:14px 34px;font-weight:700;font-size:36px">${esc(f.tag || 'Zéro jargon')} · ${esc(f.term)}</div>
 </div>
 <div class="abs" style="left:0;right:0;top:440px;display:flex;justify-content:center;${tl.show(0.2, 10.9, { dy: 80, scale: 0.4 })}">
   <div style="position:relative;width:520px;height:520px;display:flex;align-items:center;justify-content:center">

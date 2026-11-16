@@ -76,7 +76,7 @@ function settingsFor(type, { kind, igPostType, caption }) {
 }
 
 // Hashtags: from the Notion "Hashtags" field, or a default set. TikTok always gets them.
-const DEFAULT_TAGS = '#unixstudio #smallbusiness #webdesign #brussels #bruxelles #entrepreneur';
+const DEFAULT_TAGS = '#unixstudio #bruxelles #petiteentreprise #siteweb #creationsiteweb #entrepreneur';
 export function normalizeTags(raw) {
   const tags = (raw || '').split(/[\s,]+/).filter(Boolean).map((t) => '#' + t.replace(/^#+/, ''));
   return [...new Set(tags)];

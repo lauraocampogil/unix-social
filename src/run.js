@@ -31,6 +31,8 @@ export async function runOnce() {
         try { fields = JSON.parse(post.fieldsRaw); } catch (e) { throw new Error('Fields (JSON) is not valid JSON: ' + e.message); }
       }
       console.log(`[run] rendering "${post.title}" with ${post.template}`);
+      if (post.broll?.length && !fields.clips) fields.brollTags = post.broll;
+      fields._seed = post.id;
       const { kind, files, template } = await render(post.template, fields, dir, 'unix');
       const media = [];
       for (const f of files) media.push(await upload(f));

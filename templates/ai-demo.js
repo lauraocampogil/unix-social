@@ -31,7 +31,7 @@ export default {
         const ai = m.from === 'ai';
         return `<div style="display:flex;justify-content:${ai ? 'flex-start' : 'flex-end'};${tl.show(from, D, { dy: 30 })}">
           <div style="max-width:720px;border-radius:36px;${ai ? `border-bottom-left-radius:10px;background:${C.mascot};color:${C.dark}` : `border-bottom-right-radius:10px;background:${C.dark};color:${C.cream}`};padding:26px 34px;font-weight:600;font-size:40px;line-height:1.25">
-            ${ai ? `<div style="font-size:26px;font-weight:700;opacity:.7;margin-bottom:6px">Assistant</div>` : ''}${esc(m.text)}
+            ${ai ? `<div style="font-size:26px;font-weight:700;opacity:.7;margin-bottom:6px">${esc(f.assistant || 'Assistant')}</div>` : ''}${esc(m.text)}
           </div></div>`;
       })
       .join('');
@@ -41,7 +41,7 @@ ${reelBackdrop(70)}
 <div class="abs" style="left:70px;right:70px;top:380px;bottom:300px;background:${C.cream};border-radius:56px;padding:40px 36px;display:flex;flex-direction:column;${tl.show(2.6, 12, { dy: 200 })}">
   <div style="display:flex;align-items:center;gap:20px;padding-bottom:28px;border-bottom:3px solid ${C.mascot}">
     <img src="${A.mascot}" style="width:84px">
-    <div style="color:${C.dark}"><div style="font-weight:700;font-size:40px">${esc(f.business)}</div><div style="font-weight:500;font-size:28px;opacity:.75">replies in seconds · day and night</div></div>
+    <div style="color:${C.dark}"><div style="font-weight:700;font-size:40px">${esc(f.business)}</div><div style="font-weight:500;font-size:28px;opacity:.75">${esc(f.subtitle || '')}</div></div>
   </div>
   <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:24px;padding-top:24px">${bubbles}</div>
 </div>

@@ -40,7 +40,7 @@ export default {
 ${reelBackdrop(70)}
 <div class="abs display" style="left:80px;right:80px;top:640px;text-align:center;font-size:96px;${tl.show(0.2, 3)}">${esc(f.hook)}</div>
 <div class="abs" style="left:80px;right:80px;top:440px;background:${C.cream};color:${C.dark};border-radius:48px;padding:56px 52px;box-shadow:0 30px 60px rgba(30,33,64,.25);${tl.show(2.6, 10.8, { dy: 240 })}">
-  <div style="display:flex;justify-content:space-between;align-items:center"><div style="font-weight:700;font-size:30px;letter-spacing:.08em;text-transform:uppercase;opacity:.7">Quote</div><img src="${A.logoBlue}" style="height:70px"></div>
+  <div style="display:flex;justify-content:space-between;align-items:center"><div style="font-weight:700;font-size:30px;letter-spacing:.08em;text-transform:uppercase;opacity:.7">${esc(f.docLabel || 'Devis')}</div><img src="${A.logoBlue}" style="height:70px"></div>
   <div style="font-weight:700;font-size:52px;line-height:1.1;margin:30px 0 16px">${esc(f.title)}</div>
   <div style="font-weight:600;font-size:38px;line-height:1.2">${rows}</div>
   <div style="margin-top:36px;background:${C.primary};color:${C.cream};border-radius:28px;padding:30px 34px;font-weight:700;font-size:42px;line-height:1.15;${tl.show(9, D, { dy: 20, scale: 0.9 })}">${esc(f.total)}</div>

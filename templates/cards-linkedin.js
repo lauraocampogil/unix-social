@@ -26,7 +26,7 @@ export default {
 </div>`)
       .join('');
     const body = `
-<div class="abs display" style="left:0;top:70px;width:1080px;text-align:center;font-size:84px;white-space:pre-line">${esc(f.title)}</div>
+<div class="abs display" data-maxh="200" style="left:60px;top:70px;width:960px;text-align:center;font-size:84px;white-space:pre-line">${esc(f.title)}</div>
 ${cards}
 <img src="${A.logoCream}" class="abs" style="left:90px;bottom:36px;width:120px">
 <div class="abs" style="right:90px;bottom:50px;font-style:italic;font-weight:600;font-size:28px">${esc(f.footer)}</div>`;

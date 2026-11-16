@@ -26,7 +26,7 @@ export default {
 <img src="${A.mascot}" class="abs" style="right:-150px;bottom:-150px;width:440px;transform:rotate(-12deg)">
 <div class="abs" style="left:80px;top:80px;width:920px;display:flex;flex-direction:column;gap:14px;color:${C.dark}">
   <div style="font-weight:500;font-size:30px;color:${C.accent}">${esc(f.kicker)}</div>
-  <div class="display" style="font-size:84px">${esc(f.title)}</div>
+  <div class="display" data-maxh="200" style="font-size:84px">${esc(f.title)}</div>
 </div>
 <div class="abs" style="left:80px;top:345px;width:920px;display:flex;flex-direction:column;color:${C.dark}">${rows}</div>
 <img src="${A.logoBlue}" class="abs" style="left:80px;bottom:60px;width:150px">`;
