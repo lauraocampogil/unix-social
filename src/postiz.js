@@ -68,7 +68,9 @@ function settingsFor(type, { kind, igPostType, caption }) {
       autoAddMusic: isVideo ? 'no' : 'yes',
       brand_content_toggle: false,
       brand_organic_toggle: false,
-      content_posting_method: 'DIRECT_POST'
+      // UPLOAD = the video lands in your TikTok inbox/drafts and you publish it with one tap (works before the app
+      // review, and the post can be public). DIRECT_POST = published automatically (private until TikTok approves the app).
+      content_posting_method: process.env.TIKTOK_MODE === 'DIRECT_POST' ? 'DIRECT_POST' : 'UPLOAD'
     };
   }
   if (type.startsWith('linkedin')) return { __type: type, post_as_images_carousel: kind === 'carousel', carousel_name: 'Unix Studio' };
