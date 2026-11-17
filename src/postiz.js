@@ -39,9 +39,12 @@ const PREFERRED = {
 export async function findIntegration(platform) {
   const list = await integrations();
   const forced = process.env[`POSTIZ_INTEGRATION_${platform.toUpperCase()}`];
+  // The Postiz instance is shared with other brands (GoodPush…): only use Unix's own channels.
+  const match = new RegExp(process.env.POSTIZ_CHANNEL_MATCH || 'unix', 'i');
+  const mine = (i) => !i.disabled && match.test(`${i.name ?? ''} ${i.profile ?? ''} ${i.display ?? ''}`);
   const found = forced
     ? list.find((i) => i.id === forced)
-    : PREFERRED[platform].map((id) => list.find((i) => (i.identifier || i.providerIdentifier) === id && !i.disabled)).find(Boolean);
+    : PREFERRED[platform].map((id) => list.find((i) => (i.identifier || i.providerIdentifier) === id && mine(i))).find(Boolean);
   if (!found) return null;
   return { id: found.id, type: found.identifier || found.providerIdentifier };
 }
