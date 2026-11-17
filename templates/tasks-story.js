@@ -32,8 +32,8 @@ export default {
 <img src="${A.ghost}" class="abs" style="right:-260px;bottom:-200px;width:900px;animation:spin 40s linear infinite">
 <img src="${A.ghost}" class="abs" style="left:-180px;top:120px;width:420px;animation:spin 30s linear infinite reverse">
 ${centeredLogo(90, 240)}
-<div class="abs display" style="left:90px;top:360px;width:900px;font-size:100px">${esc(f.headline)}</div>
-<div class="abs" style="left:90px;top:720px;width:900px;display:flex;flex-direction:column;gap:20px">${rows}</div>
+<div class="abs display" style="left:90px;top:340px;width:900px;font-size:${f.headline.length > 34 ? 80 : 100}px">${esc(f.headline)}</div>
+<div class="abs" style="left:90px;top:${f.headline.length > 34 ? 760 : 720}px;width:900px;display:flex;flex-direction:column;gap:20px">${rows}</div>
 <div class="abs" style="left:90px;top:1440px;width:900px;display:flex;flex-direction:column;gap:14px;animation:endIn 9s ease-out infinite">
   <div class="display" style="font-size:92px">${esc(f.closing)}</div>
   <div style="font-weight:500;font-size:38px">${esc(f.sub)}</div>
