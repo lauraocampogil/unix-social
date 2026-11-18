@@ -51,13 +51,14 @@ export async function approvedPosts() {
 
 const rt = (s) => ({ rich_text: [{ type: 'text', text: { content: String(s).slice(0, 1990) } }] });
 
-export async function markScheduled(id, { postizIds, preview }) {
+export async function markScheduled(id, { postizIds, preview, tiktokText }) {
   await call('PATCH', `/pages/${id}`, {
     properties: {
       Status: { status: { name: 'Scheduled' } },
       'Postiz ID': rt(postizIds),
       Preview: { url: preview || null },
-      Error: rt('')
+      Error: rt(''),
+      ...(tiktokText ? { 'TikTok à copier': rt(tiktokText) } : {})
     }
   });
 }

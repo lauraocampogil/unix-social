@@ -83,7 +83,7 @@ export function normalizeTags(raw) {
   const tags = (raw || '').split(/[\s,]+/).filter(Boolean).map((t) => '#' + t.replace(/^#+/, ''));
   return [...new Set(tags)];
 }
-function contentFor(type, caption, hashtags) {
+export function contentFor(type, caption, hashtags) {
   let tags = normalizeTags(hashtags);
   if (!tags.length) tags = normalizeTags(DEFAULT_TAGS);
   if (type.startsWith('linkedin')) tags = tags.slice(0, 3);

@@ -2,7 +2,7 @@
 import { rm } from 'node:fs/promises';
 import { pathToFileURL } from 'node:url';
 import { approvedPosts, markScheduled, markError } from './notion.js';
-import { upload, schedule } from './postiz.js';
+import { upload, schedule, contentFor } from './postiz.js';
 import { render, closeBrowser } from './render.js';
 
 const REQUIRED = ['NOTION_TOKEN', 'NOTION_POSTS_DB', 'POSTIZ_URL', 'POSTIZ_API_KEY'];
@@ -46,7 +46,12 @@ export async function runOnce() {
         igPostType: template.igPostType
       });
       const ids = (Array.isArray(res) ? res : [res]).map((r) => r.postId || r.id || r.group).filter(Boolean).join(', ');
-      await markScheduled(post.id, { postizIds: ids || JSON.stringify(res).slice(0, 500), preview: media[0]?.path });
+      await markScheduled(post.id, {
+        postizIds: ids || JSON.stringify(res).slice(0, 500),
+        preview: media[0]?.path,
+        // TikTok drafts arrive without text: this is the caption + hashtags to paste in the app.
+        tiktokText: post.platforms.includes('TikTok') ? contentFor('tiktok', post.caption || post.title, post.hashtags) : ''
+      });
       console.log(`[run] ✓ scheduled "${post.title}"`);
     } catch (err) {
       console.error(`[run] ✗ "${post.title}":`, err.message);
