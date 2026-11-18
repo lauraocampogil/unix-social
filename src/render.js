@@ -51,7 +51,8 @@ async function openPage(html, size) {
 async function shot(html, size, out) {
   const { page, cleanup } = await openPage(html, size);
   await page.evaluate(() => document.getAnimations().forEach((a) => { a.pause(); a.currentTime = 0; }));
-  await page.locator('#frame').screenshot({ path: out, type: 'png' });
+  // JPEG: Instagram's API refuses some PNGs ("Only photo or video can be accepted").
+  await page.locator('#frame').screenshot({ path: out, type: 'jpeg', quality: 92 });
   await cleanup();
   return out;
 }
@@ -171,7 +172,7 @@ export async function render(templateName, fields, outDir, slug = 'post') {
   } else {
     const pages = Array.isArray(built) ? built : [built];
     for (let i = 0; i < pages.length; i++) {
-      const name = pages.length > 1 ? `${slug}-${String(i + 1).padStart(2, '0')}.png` : `${slug}.png`;
+      const name = pages.length > 1 ? `${slug}-${String(i + 1).padStart(2, '0')}.jpg` : `${slug}.jpg`;
       files.push(await shot(pages[i], tpl.size, path.join(outDir, name)));
     }
   }

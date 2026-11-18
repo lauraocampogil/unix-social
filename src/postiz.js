@@ -39,19 +39,16 @@ const PREFERRED = {
 export async function findIntegration(platform) {
   const list = await integrations();
   const forced = process.env[`POSTIZ_INTEGRATION_${platform.toUpperCase()}`];
-  // The Postiz instance is shared with other brands (GoodPush…): only use Unix's own channels.
-  const match = new RegExp(process.env.POSTIZ_CHANNEL_MATCH || 'unix', 'i');
-  const mine = (i) => !i.disabled && match.test(`${i.name ?? ''} ${i.profile ?? ''} ${i.display ?? ''}`);
   const found = forced
     ? list.find((i) => i.id === forced)
-    : PREFERRED[platform].map((id) => list.find((i) => (i.identifier || i.providerIdentifier) === id && mine(i))).find(Boolean);
+    : PREFERRED[platform].map((id) => list.find((i) => (i.identifier || i.providerIdentifier) === id && !i.disabled)).find(Boolean);
   if (!found) return null;
   return { id: found.id, type: found.identifier || found.providerIdentifier };
 }
 
 export async function upload(file) {
   const form = new FormData();
-  const mime = file.endsWith('.mp4') ? 'video/mp4' : 'image/png';
+  const mime = file.endsWith('.mp4') ? 'video/mp4' : file.endsWith('.jpg') ? 'image/jpeg' : 'image/png';
   form.append('file', new Blob([await readFile(file)], { type: mime }), path.basename(file));
   const r = await call('POST', '/upload', form, true);
   return { id: r.id, path: r.path };
